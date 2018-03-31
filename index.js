@@ -39,20 +39,28 @@ app.get('/get', (request,result) => {
       });
       request.write("")
       request.end();
-
-
   })((error, statusCode, headers, body) => {
       var array = JSON.parse(body)
       var string = '<select>'
-      //array.Data[i].Id
       for (var i = 0; i < array.Data.length; i++) {
         string += '<option>' + array.Data[i].Name + '</option>'
-        //console.log(string);
       }
       string += '</select>'
-      //console.log(string);
-      result.send(string)
+      result.send('<form action="/change" method="GET">'+string+string+'<button type="submit">Send</button></form>')
   });
+})
+
+app.get('/change', (req, res) =>{
+  var first_value = req.query.first
+  var second_value = req.query.second
+  var first_name = req.qeury.first_name
+  var second_name = req.query.second_name
+  if(first_value > second_value){
+    // first is large
+    res.send('')
+  }else {
+    res.send()
+  }
 })
 
 app.listen(3000, function(){
